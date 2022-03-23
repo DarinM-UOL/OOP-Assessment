@@ -17,26 +17,47 @@ namespace OOP_Assessment
             Input getText = new Input();
             bool correct = false;
             string text = "";
+            //allows the user to pick option one or two
             Console.WriteLine("do you want to manually enter text(type 'enter') or have it read from a file?(type 'read'): ");
+            //error handling while loop
             while (correct == false)
             {
                 string response = Console.ReadLine();
+                //more error catching
                 while (response != "enter" && response != "read")
                 {
+                    //makes the user input a correct value
                     Console.WriteLine("that response is invalid, please choose enter or read: ");
                     response = Console.ReadLine();
                 }
                 if (response == "enter")
                 {
+                    //runs option 1
                     string lines = getText.manualTextInput();
                     text = lines;
                 }
                 else if (response == "read")
                 {
-                    Console.WriteLine("please input the file path of the selected file: ");
-                    string path = Console.ReadLine();
-                    string lines = getText.fileTextInput(path);
-                    text = lines;
+                    //runs option 2
+                    bool valid = false;
+                    //prevents user from inputting a value that will throw back an exception
+                    while (valid == false)
+                    {
+                        Console.WriteLine("please input the file path of the selected file: ");
+                        string path = Console.ReadLine();
+                        //Exception handling, if the file cannot be found 
+                        try
+                        {
+                            //runs option 2
+                            string lines = getText.fileTextInput(path);
+                            text = lines;
+                            valid = true;
+                        }
+                        catch (FileNotFoundException)
+                        {
+                            Console.WriteLine("file not found, please try again.");
+                        }
+                    }
                 }
                 else
                 {

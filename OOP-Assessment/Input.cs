@@ -24,6 +24,7 @@ namespace OOP_Assessment
             {
                 string Sentence = Console.ReadLine();
                 Inputs.Add(Sentence);
+                //checks for asterisks
                 int found = Sentence.IndexOf('*');
                 if (found != -1)
                 {
@@ -31,6 +32,7 @@ namespace OOP_Assessment
                 }
             }
             string[] Sentences = Inputs.ToArray();
+            //joins the sentences into one string and returns them
             string fullText = String.Join("", Sentences);
 
             return fullText;
@@ -42,6 +44,7 @@ namespace OOP_Assessment
         //Gets text input from a .txt file
         public string fileTextInput(string fileName)
         {
+            //reads text and puts it into a string
             string text = File.ReadAllText(fileName);
             Console.WriteLine(text[0]);
             return text;
