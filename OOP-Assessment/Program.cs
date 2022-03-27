@@ -16,7 +16,7 @@ namespace OOP_Assessment
             //Get either manually entered text, or text from a file
             Input getText = new Input();
             bool correct = false;
-            string text = "";
+            string rawText = "";
             //allows the user to pick option one or two
             Console.WriteLine("do you want to manually enter text(type 'enter') or have it read from a file?(type 'read'): ");
             //error handling while loop
@@ -34,7 +34,7 @@ namespace OOP_Assessment
                 {
                     //runs option 1
                     string lines = getText.manualTextInput();
-                    text = lines;
+                    rawText = lines;
                 }
                 else if (response == "read")
                 {
@@ -50,7 +50,7 @@ namespace OOP_Assessment
                         {
                             //runs option 2
                             string lines = getText.fileTextInput(path);
-                            text = lines;
+                            rawText = lines;
                             valid = true;
                         }
                         catch (FileNotFoundException)
@@ -65,15 +65,17 @@ namespace OOP_Assessment
                 }
                 correct = true;
             }
-            getText.formatText(text);
 
+            string text = getText.formatText(rawText);
             //Create an 'Analyse' object
-            //Pass the text input to the 'analyseText' method
             Analyse analyseText = new Analyse();
+            analyseText.GenerateLongs(text);
+            //Pass the text input to the 'analyseText' method
             List<int> results = analyseText.analyseText(text);
+            Dictionary<char, int> Frequencies = analyseText.letterFreq(text);
             //Receive a list of integers back
             Report Result = new Report();
-            Result.reportValues(results);
+            Result.reportValues(results, Frequencies);
 
             //Report the results of the analysis
 

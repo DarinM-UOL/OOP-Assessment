@@ -54,7 +54,15 @@ namespace OOP_Assessment
         //additional method
         //takes the text and removes unnescessary characters
         {
-            Sentences.Trim(new char[] { ' ', ',', '!', '\'', '\"', '*' });
+            char[] toRemove = { ',', '!', '\'', '\"', '*' };
+            foreach (char character in Sentences)
+            {
+                if (toRemove.Contains(character))
+                {
+                    Sentences = Sentences.Replace(character, ' ');
+                }
+                
+            }
             return Sentences;
         }
     }    
