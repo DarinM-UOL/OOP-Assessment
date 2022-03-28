@@ -3,11 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.IO;
 
 namespace OOP_Assessment
 {
     public class Analyse
     {
+        private char[] vowels = { 'a', 'A', 'e', 'E', 'i', 'I', 'o', 'O', 'u', 'U' }; //encapsulated
+        private char wordEnd = ' ';
         //Handles the analysis of text
 
         //Method: analyseText
@@ -29,7 +32,7 @@ namespace OOP_Assessment
                 values.Add(0);
             }
             //creates an array of all vowels
-            char[] vowels = { 'a', 'A', 'e', 'E', 'i', 'I', 'o', 'O', 'u', 'U' };
+            
             foreach (char i in input)
             {
                 //checks if the character is uppercase
@@ -63,6 +66,45 @@ namespace OOP_Assessment
         //adds vowels and consonants
         values[5] = values[1] + values[2];
         return values;
+        }
+
+        public void GenerateLongs(string text)
+        //Additional Method - checks for words with 7 or more letters and writes them to a text file
+        {
+            string allText = text.Replace(".", "");
+            char wordEnd = ' ';
+            string[] allWords = allText.Split(wordEnd);
+            List<string> longWords = new List<string>();
+            foreach (string word in allWords)
+            {
+                if (word.Length > 6)
+                {
+                    longWords.Add(word);
+                }
+
+            }
+            File.WriteAllLines("longWords.txt", longWords);
+            string fullpath = Path.GetFullPath("longWords.txt");
+        }
+
+        public Dictionary<char, int> letterFreq(string text)
+        //Additional Method - counts the frequency of each letter in the text
+        {
+            text = text.Replace(".", "");
+            text = text.Replace(" ", "");
+            Dictionary<char, int> Frequencies = new Dictionary<char, int>();
+            foreach (char character in text)
+            {
+                if (Frequencies.ContainsKey(character))
+                {
+                    Frequencies[character]++;
+                }
+                else
+                {
+                    Frequencies[character] = 1;
+                }
+            }
+            return Frequencies;
         }
     }
 }

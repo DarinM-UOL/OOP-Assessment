@@ -9,7 +9,7 @@ namespace OOP_Assessment
 {
     public class Input
     {
-
+        private char[] toRemove = { ',', '!', '\'', '\"', '*' }; //encapsulated 
         //Method: manualTextInput
         //Arguments: none
         //Returns: string
@@ -24,6 +24,7 @@ namespace OOP_Assessment
             {
                 string Sentence = Console.ReadLine();
                 Inputs.Add(Sentence);
+                //checks for asterisks
                 int found = Sentence.IndexOf('*');
                 if (found != -1)
                 {
@@ -31,6 +32,7 @@ namespace OOP_Assessment
                 }
             }
             string[] Sentences = Inputs.ToArray();
+            //joins the sentences into one string and returns them
             string fullText = String.Join("", Sentences);
 
             return fullText;
@@ -42,6 +44,7 @@ namespace OOP_Assessment
         //Gets text input from a .txt file
         public string fileTextInput(string fileName)
         {
+            //reads text and puts it into a string
             string text = File.ReadAllText(fileName);
             Console.WriteLine(text[0]);
             return text;
@@ -51,7 +54,14 @@ namespace OOP_Assessment
         //additional method
         //takes the text and removes unnescessary characters
         {
-            Sentences.Trim(new char[] { ' ', ',', '!', '\'', '\"', '*' });
+            foreach (char character in Sentences)
+            {
+                if (toRemove.Contains(character))
+                {
+                    Sentences = Sentences.Replace(character, ' ');
+                }
+                
+            }
             return Sentences;
         }
     }    
