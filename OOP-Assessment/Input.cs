@@ -9,7 +9,7 @@ namespace OOP_Assessment
 {
     public class Input
     {
-
+        private char[] toRemove = { ',', '!', '\'', '\"', '*' }; //encapsulated 
         //Method: manualTextInput
         //Arguments: none
         //Returns: string
@@ -54,7 +54,6 @@ namespace OOP_Assessment
         //additional method
         //takes the text and removes unnescessary characters
         {
-            char[] toRemove = { ',', '!', '\'', '\"', '*' };
             foreach (char character in Sentences)
             {
                 if (toRemove.Contains(character))

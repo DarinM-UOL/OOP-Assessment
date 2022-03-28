@@ -9,6 +9,8 @@ namespace OOP_Assessment
 {
     public class Analyse
     {
+        private char[] vowels = { 'a', 'A', 'e', 'E', 'i', 'I', 'o', 'O', 'u', 'U' }; //encapsulated
+        private char wordEnd = ' ';
         //Handles the analysis of text
 
         //Method: analyseText
@@ -30,7 +32,7 @@ namespace OOP_Assessment
                 values.Add(0);
             }
             //creates an array of all vowels
-            char[] vowels = { 'a', 'A', 'e', 'E', 'i', 'I', 'o', 'O', 'u', 'U' };
+            
             foreach (char i in input)
             {
                 //checks if the character is uppercase
